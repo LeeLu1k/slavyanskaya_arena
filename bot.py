@@ -1,10 +1,9 @@
-import telebot
 import os
+import telebot
 
 TOKEN = os.getenv('TELEGRAM_TOKEN')
+WEB_APP_URL = os.getenv('WEB_APP_URL')  # URL вашего Web App (проект 2)
 bot = telebot.TeleBot(TOKEN)
-
-WEB_APP_URL = os.getenv('WEB_APP_URL')  # URL вашего Web App, например Railway
 
 @bot.message_handler(commands=['start'])
 def start(message):
