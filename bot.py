@@ -8,12 +8,16 @@ TOKEN = os.getenv("BOT_TOKEN")
 WEBAPP_URL = "https://slavyanskayaarena-production.up.railway.app/webapp/index.html"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # Просто проверяем, работает ли бот
+    await update.message.reply_text("Бот работает!")
+
+    # Кнопка для открытия Web App
     keyboard = [
         [InlineKeyboardButton("Открыть мини-приложение", web_app=WebAppInfo(url=WEBAPP_URL))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(
-        "Привет! Нажми кнопку ниже, чтобы открыть мини-приложение:", 
+        "Нажми кнопку ниже, чтобы открыть мини-приложение:", 
         reply_markup=reply_markup
     )
 
