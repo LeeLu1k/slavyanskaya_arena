@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
-WEBAPP_URL = "https://your-railway-app-url/webapp/index.html"  # URL твоего Web App
+WEBAPP_URL = "https://web-production-b0fda.up.railway.app/webapp/index.html"  # URL твоего Web App
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
