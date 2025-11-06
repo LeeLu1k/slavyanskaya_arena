@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Славянская арена</title>
+</head>
+<body>
+    <h1>Славянская арена</h1>
+    <p id="welcome">Добро пожаловать!</p>
+    <button id="battleBtn">В бой!</button>
+    <pre id="log"></pre>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        const user = tg.initDataUnsafe.user;
+        document.getElementById("welcome").innerText = `Привет, ${user.first_name}!`;
+
+        document.getElementById("battleBtn").addEventListener("click", () => {
+            fetch(`/battle?user_id=${user.id}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("log").innerText = data.log.join("\n") + "\nРезультат: " + data.result;
+                });
+        });
+    </script>
+</body>
+</html>
