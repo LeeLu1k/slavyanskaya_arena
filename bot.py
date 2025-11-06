@@ -1,18 +1,22 @@
 import os
-import telebot
+from telegram import Update, WebAppInfo, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from dotenv import load_dotenv
 
-TOKEN = os.getenv('TELEGRAM_TOKEN')
-WEB_APP_URL = os.getenv('WEB_APP_URL')  # URL вашего Web App (проект 2)
-bot = telebot.TeleBot(TOKEN)
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
 
-@bot.message_handler(commands=['start'])
-def start(message):
-    markup = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-    web_app_button = telebot.types.KeyboardButton(
-        text="Открыть арену",
-        web_app=telebot.types.WebAppInfo(url=WEB_APP_URL)
-    )
-    markup.add(web_app_button)
-    bot.send_message(message.chat.id, "Добро пожаловать в Славянскую арену! Откройте веб-приложение ниже:", reply_markup=markup)
+WEBAPP_URL = "https://your-railway-app-url/webapp/index.html"  # URL твоего Web App
 
-bot.polling()
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [InlineKeyboardButton("Открыть мини-приложение", web_app=WebAppInfo(url=WEBAPP_URL))]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text("Привет! Нажми кнопку ниже, чтобы открыть мини-приложение:", reply_markup=reply_markup)
+
+if __name__ == "__main__":
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    print("Бот запущен...")
+    app.run_polling()
