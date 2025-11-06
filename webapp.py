@@ -8,7 +8,7 @@ def serve_webapp(path):
 
 @app.route("/")
 def index():
-    return "Hello! Web App is working."
+    return "Telegram Web App server is running!"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
