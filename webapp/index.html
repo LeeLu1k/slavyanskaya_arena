@@ -1,26 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Славянская арена</title>
+    <meta charset="UTF-8">
+    <title>Мини-приложение</title>
 </head>
 <body>
-    <h1>Славянская арена</h1>
-    <p id="welcome">Добро пожаловать!</p>
-    <button id="battleBtn">В бой!</button>
-    <pre id="log"></pre>
+    <h1>Привет из Web App!</h1>
+    <button id="sendDataBtn">Отправить данные боту</button>
 
-    <script>
-        const tg = window.Telegram.WebApp;
-        const user = tg.initDataUnsafe.user;
-        document.getElementById("welcome").innerText = `Привет, ${user.first_name}!`;
-
-        document.getElementById("battleBtn").addEventListener("click", () => {
-            fetch(`/battle?user_id=${user.id}`)
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById("log").innerText = data.log.join("\n") + "\nРезультат: " + data.result;
-                });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
